@@ -1,13 +1,15 @@
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, HttpResponseRedirect
-from .models import User
+from .models import User, EmailVerification
 from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from django.contrib import auth, messages
 from django.urls import reverse, reverse_lazy
 from product.models import Basket
+from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
+from common.views import TitleMixin
 
 
 class UserRegistrationView(SuccessMessageMixin, CreateView):
@@ -27,15 +29,27 @@ class UserProfileView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('users:profile', args=(self.request.user.id,))
 
-    def get_context_data(self, **kwargs):
-        context = super(UserProfileView, self).get_context_data(**kwargs)
-        context['baskets'] = Basket.objects.filter(user=self.object)
-        return context
-
 
 class UserLoginView(LoginView):
     template_name = 'user/login.html'
     form_class = UserLoginForm
+
+
+class EmailVerificationView(TitleMixin, TemplateView):
+    template_name = 'user/email.html'
+    title = 'Email Verification'
+
+    def get(self, request, *args, **kwargs):
+        template = super(EmailVerificationView, self).get(request, *args, **kwargs)
+        code = kwargs['code']
+        user = User.objects.get(email=kwargs['email'])
+        email = EmailVerification.objects.filter(user=user, code=code)
+        if email.exists() and not email.first().is_expired():
+            user.is_verified_email = True
+            user.save()
+            return template
+        else:
+            return HttpResponseRedirect(reverse('index'))
 
 # def login(request):
 #     if request.method == 'POST':

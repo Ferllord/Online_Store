@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'product.context_processors.baskets',
             ],
         },
     },
@@ -141,3 +142,10 @@ LOGIN_URL = '/users/login'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+EMAIL_HOST = 'smtp.yandex.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'alshevskiv@yandex.ru'
+EMAIL_HOST_PASSWORD = 'freyfvfnfnf2004'
+EMAIL_USE_SSL = True
