@@ -25,6 +25,7 @@ urlpatterns = [
     path('', product_views.IndexView.as_view(), name='index'),
     path('products/', include('product.urls', namespace='products')),
     path('users/', include('user.urls', namespace='users')),
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:
