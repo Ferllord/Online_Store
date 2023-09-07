@@ -173,7 +173,7 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = email_host_user
 EMAIL_HOST_PASSWORD = email_pass
 EMAIL_USE_SSL = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
