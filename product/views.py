@@ -7,6 +7,7 @@ from django.views.generic.list import ListView
 from common.views import TitleMixin
 
 
+
 # Create your views here.
 
 
