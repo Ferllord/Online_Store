@@ -11,9 +11,18 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
+    db_password = os.environ.get('DOCKER_DB_PASSWORD')
+    email_host_user = os.environ.get('EMAIL_HOST_USER')
+    email_pass = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -101,7 +110,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'store_db',
         'USER': 'store',
-        'PASSWORD': 'store_password',
+        'PASSWORD': db_password,
         'HOST': 'localhost',
         'PORT': '8000',
     }
@@ -159,11 +168,11 @@ LOGIN_URL = '/users/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-# EMAIL_HOST = 'smtp.yandex.com'
-# EMAIL_PORT = 465
-# EMAIL_HOST_USER = 'alshevskiv@yandex.ru'
-# EMAIL_HOST_PASSWORD = 'freyfvfnfnf2004'
-# EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.yandex.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = email_host_user
+EMAIL_HOST_PASSWORD = email_pass
+EMAIL_USE_SSL = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = [
@@ -182,3 +191,7 @@ SOCIALACCOUNT_PROVIDERS = {
         ]
     }
 }
+
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
