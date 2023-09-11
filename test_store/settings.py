@@ -23,6 +23,7 @@ if os.path.exists(dotenv_path):
     db_password = os.environ.get('DOCKER_DB_PASSWORD')
     email_host_user = os.environ.get('EMAIL_HOST_USER')
     email_pass = os.environ.get('EMAIL_HOST_PASSWORD')
+    strip_sk_keys = os.environ.get('STRIP_SECRET')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.humanize',
     'debug_toolbar',
 
     'allauth',
@@ -196,3 +198,9 @@ SOCIALACCOUNT_PROVIDERS = {
 
 CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+
+STRIPE_PUBLIC_URL = 'pk_test_51NpGmZEKFOE4tPltOIv6ubNdqvdztfF4ijGRRDGhGwUHf8r17ovr4LM7SXZ0DGP8ouXMu6LAgLPPkPWAKSULP9qO00kNnvAjbH'
+STRIPE_SECRET_URL = strip_sk_keys
+
+DOMAIN_NAME = 'http://localhost:8000'

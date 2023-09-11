@@ -10,9 +10,9 @@ class Order(models.Model):
 
     STATUSES = (
         (CREATED, 'Создан'),
-        (CREATED, 'Оплачен'),
-        (CREATED, 'В пути'),
-        (CREATED, 'Доставлен')
+        (PAID, 'Оплачен'),
+        (ON_WAY, 'В пути'),
+        (DELIVERED, 'Доставлен')
     )
 
     first_name = models.CharField(max_length=64)
