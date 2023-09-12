@@ -24,6 +24,7 @@ if os.path.exists(dotenv_path):
     email_host_user = os.environ.get('EMAIL_HOST_USER')
     email_pass = os.environ.get('EMAIL_HOST_PASSWORD')
     strip_sk_keys = os.environ.get('STRIP_SECRET')
+    webhook = os.environ.get('STRIPE_WEBHOOK')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -202,5 +203,7 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 
 STRIPE_PUBLIC_URL = 'pk_test_51NpGmZEKFOE4tPltOIv6ubNdqvdztfF4ijGRRDGhGwUHf8r17ovr4LM7SXZ0DGP8ouXMu6LAgLPPkPWAKSULP9qO00kNnvAjbH'
 STRIPE_SECRET_URL = strip_sk_keys
+
+STRIPE_WEBHOOK_SECRET = webhook
 
 DOMAIN_NAME = 'http://localhost:8000'

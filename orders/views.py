@@ -1,4 +1,6 @@
+from django.http import HttpResponse
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
 from .forms import OrderForm
@@ -42,3 +44,10 @@ class OrderCreateView(CreateView):
     def form_valid(self, form):
         form.instance.initiator = self.request.user
         return super(OrderCreateView, self).form_valid(form)
+
+@csrf_exempt
+def my_webhook_view(request):
+  payload = request.body
+  print(payload)
+
+  return HttpResponse(status=200)

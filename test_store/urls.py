@@ -19,6 +19,7 @@ from django.urls import path, include
 from product import views as product_views
 from django.conf.urls.static import static
 from django.conf import settings
+from orders.views import my_webhook_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('users/', include('user.urls', namespace='users')),
     path('accounts/', include('allauth.urls')),
     path('orders/', include('orders.urls', namespace='orders')),
+    path('webhook/stripe/', my_webhook_view, name ='webhook'),
 ]
 
 if settings.DEBUG:

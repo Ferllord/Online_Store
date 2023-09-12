@@ -9,4 +9,5 @@ urlpatterns = [
     path('create/',OrderCreateView.as_view(), name='order_create'),
     path('success/',SuccerssView.as_view(), name='order_success'),
     path('cancel/',CanceledView.as_view(), name='order_canceled'),
+    path('cancel/',CanceledView.as_view(), name='order_canceled'),
 ]
