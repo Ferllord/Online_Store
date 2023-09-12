@@ -25,12 +25,13 @@ if os.path.exists(dotenv_path):
     email_pass = os.environ.get('EMAIL_HOST_PASSWORD')
     strip_sk_keys = os.environ.get('STRIP_SECRET')
     webhook = os.environ.get('STRIPE_WEBHOOK')
+    django_secret_key = os.environ.get('DJANGO_SK')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&&ii(p!wgocji37p19w&4w7qyao!c10%%49q4w31xz07#&n2lw'
+SECRET_KEY = django_secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
