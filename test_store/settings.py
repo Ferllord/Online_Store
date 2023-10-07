@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.humanize',
     'debug_toolbar',
+    'rest_framework',
 
     'allauth',
     'allauth.account',
