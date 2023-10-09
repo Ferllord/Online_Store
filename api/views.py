@@ -5,6 +5,7 @@ from product.models import Product, Basket
 from rest_framework.parsers import JSONParser
 from user.models import User
 from django.http import JsonResponse
+from rest_framework.authtoken.models import Token
 
 
 class ProductViewList(generics.ListAPIView):
@@ -27,6 +28,7 @@ def signup(request):
             data = JSONParser().parse(request)
             user = User.objects.create_user(data['username'], password=data['password'])
             user.save()
-            return JsonResponse({'token': 'qweqweqweqwewq'}, status=201)
+            token = Token.objects.create(user=user)
+            return JsonResponse({'token': str(token)}, status=201)
         except:
             return JsonResponse({'error': 'Username is already taken'}, status=201)
